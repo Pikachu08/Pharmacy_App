@@ -14,7 +14,8 @@ namespace Pharmacy_App
 {
     public partial class AdminPanelAdd : Form
     {
-        string xmlFileLocation = "C://Users/Sateri/Desktop/Pharmacy_App/Pharmacy_App/medicineInfo.xml";//this is path to the xml file
+        string xmlFileLocation = @"C:/Users/Public/PharmacyAppData/medicineInfo.xml";
+        string folderName = @"C:/Users/Public/PharmacyAppData";
 
         public AdminPanelAdd()
         {
@@ -23,44 +24,58 @@ namespace Pharmacy_App
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
-            label6.Text = dateTimePickerExpirationDate.Text.ToString();
-            //this.Close();// closing admin panel add form
+            this.Close();// closing admin panel add form
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            string name,amount,cost,price; //decleration of values for get informations from textboxes 
+            string name, amount, cost, price, expirationDate, sellDate, status = ""; //decleration of values for get informations from textboxes 
 
-            
+
             //getting values from textboxes to values.
 
-            name = textBoxName.Text.ToString(); 
+            name = textBoxName.Text.ToString();
             amount = textBoxName.Text.ToString();
             cost = textBoxCost.Text.ToString();
             price = textBoxPrice.Text.ToString();
+            expirationDate = dateTimePickerExpirationDate.Text.ToString();
+            sellDate = dateTimePickerSellDate.Text.ToString();
+
+            if (radioButtonSaleable.Checked) //here we are get status from salable radioButton
+            {
+                status = radioButtonSaleable.Text.ToString();
+            }
+
+            if (radioButtonUnsaleable.Checked) //here we are get status from unSalable radioButton
+            {
+                status = radioButtonUnsaleable.Text.ToString();
+            }
+
             //-------------------------------------------
 
 
-            var doc = XDocument.Load(@xmlFileLocation);//opening xml file
+            var doc = XDocument.Load(@xmlFileLocation); //opening xml file
 
             //adding new element and saving it 
             var newElement = new XElement("medicine",
-            new XElement("name", name),
+            new XElement("names", name),
             new XElement("amount", amount),
-            new XElement("cost", cost));
-            new XElement("price", price);
+            new XElement("cost", cost),
+            new XElement("price", price),
+            new XElement("expirationDate", expirationDate),
+            new XElement("saleDate", sellDate),
+            new XElement("status", status));
 
             doc.Element("medicines").Add(newElement);
 
             doc.Save(@xmlFileLocation);
 
 
-        
+
         }
 
         private void AdminPanelAdd_Load(object sender, EventArgs e)
         {
         }
-        
     }
 }
