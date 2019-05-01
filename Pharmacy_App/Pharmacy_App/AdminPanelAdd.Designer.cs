@@ -109,6 +109,7 @@
             this.buttonCancel.TabIndex = 40;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.ButtonCancel_Click_1);
             // 
             // radioButtonUnsaleable
             // 

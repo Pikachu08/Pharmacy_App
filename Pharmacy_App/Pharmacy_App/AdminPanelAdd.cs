@@ -35,7 +35,7 @@ namespace Pharmacy_App
             //getting values from textboxes to values.
 
             name = textBoxName.Text.ToString();
-            amount = textBoxName.Text.ToString();
+            amount = textBoxAmount.Text.ToString();
             cost = textBoxCost.Text.ToString();
             price = textBoxPrice.Text.ToString();
             expirationDate = dateTimePickerExpirationDate.Text.ToString();
@@ -76,6 +76,11 @@ namespace Pharmacy_App
 
         private void AdminPanelAdd_Load(object sender, EventArgs e)
         {
+        }
+
+        private void ButtonCancel_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
